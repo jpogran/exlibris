@@ -7,6 +7,10 @@ a {
   text-decoration: underline;
 }
 
+h2 {
+  @apply text-2xl font-semibold pb-4 pt-4;
+}
+
 .highlight{
   @apply pl-20 pr-20 pb-4;
 }

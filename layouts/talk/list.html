@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="pl-20 pr-20">
+  <h1 class="font-bold tracking-tight text-center text-6xl pb-4">Presentations and Conference Talks</h1>
+
+  {{ with .Content }}
+  <div class="article-style" itemprop="articleBody">{{ . }}</div>
+  {{ end }}
+
+  {{ range .Data.Pages }}
+  <div class="pb-10">
+    <div class="relative pb-5/6">
+      <div class="rounded" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe
+          src="https://www.youtube.com/embed/{{.Params.youtube}}?autoplay=0"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
+          allowfullscreen title="YouTube Video"></iframe>
+      </div>
+    </div>
+
+    <div class="relative px-4 -mt-16">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="pb-2 font-semibold leading-tight text-4xl"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <h1 class="pb-2 text-gray-500 text-sm">Posted {{ .PublishDate.Format "2006-Jan-02" }} Last updated {{ .Lastmod.Format "2006-Jan-02" }}</h1>
+        <div class="pl-4 text-lg">
+          {{ if .Params.summary }}
+          {{ .Params.summary | plainify | emojify }}
+          {{ else if .Params.abstract }}
+          {{ .Params.abstract | plainify | emojify | truncate 250 }}
+          {{ else if .Summary }}
+          {{ .Summary | plainify | emojify }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}
