@@ -1,0 +1,7 @@
+<footer>
+  {{ if not site.IsServer }}
+  {{ if site.GoogleAnalytics }}
+  {{ template "_internal/google_analytics_async.html" . }}
+  {{ end }}
+  {{ end }}
+</footer>

@@ -1,0 +1,12 @@
+name        = "exlibris"
+license     = "MIT"
+licenselink = "https://github.com/jpogran/exlibris/blob/master/LICENSE"
+description = ""
+homepage    = "https://github.com/jpogran/exlibris"
+tags        = []
+features    = []
+min_version = "0.41"
+
+[author]
+  name     = "jpogran"
+  homepage = "https://github.com/jpogran"

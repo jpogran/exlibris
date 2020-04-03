@@ -1,0 +1,38 @@
+{{ define "main" }}
+<div class="pl-20">
+
+  {{ with .Content }}
+  <div class="article-style" itemprop="articleBody">{{ . }}</div>
+  {{ end }}
+
+  {{ $paginator := .Paginate .Data.Pages }}
+  {{ range $paginator.Pages }}
+  <div class="pb-4">
+    <h2 class="text-xl"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="pl-4">
+      {{ if .Params.summary }}
+      {{ .Params.summary | plainify | emojify }}
+      {{ else if .Params.abstract }}
+      {{ .Params.abstract | plainify | emojify | truncate 250 }}
+      {{ else if .Summary }}
+      {{ .Summary | plainify | emojify }}
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+  <nav class="pt-4">
+    <ul class="pagination justify-content-center">
+      {{ if .Paginator.HasPrev }}
+      <li class="page-item"><a class="page-link" href="{{ .Paginator.Prev.URL }}">&laquo;</a></li>
+      {{ end }}
+      {{ if .Paginator.HasNext }}
+      <li class="page-item"><a class="page-link" href="{{ .Paginator.Next.URL }}">&raquo;</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+  {{ end }}
+
+</div>
+{{ end }}

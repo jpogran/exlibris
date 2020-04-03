@@ -1,0 +1,18 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+a {
+  color: theme('colors.blue');
+  text-decoration: underline;
+}
+
+.highlight{
+  @apply pl-20 pr-20 pb-4;
+}
+
+p{
+  @apply leading-relaxed pb-4;
+}
+
+@import "tailwindcss/utilities";
