@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="container mx-auto px-4">
+  <div class="">
+    <article class="">
+      <h1 class="font-bold text-6xl tracking-tight">{{.Title}}</h1>
+      <h1 class="font-semibold text-gray-700 text-xl pb-2">{{.Params.subtitle}}</h1>
+      <h1 class="font-semibold text-gray-600 text-sm">{{ .PublishDate.Format "02 January 2006" }}</h1>
+      <div class="pt-4">
+        {{.Content}}
+      </div>
+    </article>
+    <div class="">
+    </div>
+  </div>
+</div>"
+{{ end }}

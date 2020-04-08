@@ -1,21 +1,20 @@
 {{ define "main" }}
-<div class="pt-10 pl-20 pr-20">
-  <h1 class="font-bold tracking-tight text-center text-6xl pb-4">Published Works</h1>
+<div class="container mx-auto px-4">
+  <h1 class="font-bold tracking-tight text-center text-5xl pb-4">Published Works</h1>
   {{ with .Content }}
   <div class="" itemprop="articleBody">{{ . }}</div>
   {{ end }}
 
   {{ range .Data.Pages }}
-  <div class="pb-10">
-    <div class="relative pb-5/6">
-      <img src="{{.Params.img|absURL}}" class="h-64 w-full object-cover rounded-lg shadow-md" alt="...">
+  <div class="max-w-sm w-full md:max-w-full lg:max-w-full lg:flex pb-5">
+    <div class="h-48 lg:h-auto lg:w-48 flex-none object-cover bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          style="background-image: url('{{.Params.img|absURL}}')"
+          title="">
     </div>
-
-    <div class="relative px-4 -mt-16">
-      <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="pb-2 font-semibold leading-tight text-4xl"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-        <h1 class="pb-2 text-gray-500 text-sm">Published {{ .PublishDate.Format "2006-Jan-02" }}</h1>
-        <div class="pl-4 text-lg">
+    <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <div class="text-gray-900 font-bold text-xl mb-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <p class="text-gray-700 text-base">
           {{ if .Params.summary }}
           {{ .Params.summary | plainify | emojify }}
           {{ else if .Params.abstract }}
@@ -23,10 +22,16 @@
           {{ else if .Summary }}
           {{ .Summary | plainify | emojify }}
           {{ end }}
+        </p>
+      </div>
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full mr-4" src="/img/James-Pogran-avatar.jpg" alt="Avatar of Jonathan Reinink">
+        <div class="text-sm">
+          <p class="text-gray-900 leading-none">{{.Site.Params.author}}</p>
+          <p class="text-gray-600">{{ .PublishDate.Format "2006-Jan-02" }}</p>
         </div>
       </div>
     </div>
-
   </div>
   {{ end }}
 

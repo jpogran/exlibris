@@ -7,12 +7,21 @@ a {
   text-decoration: underline;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5{
+  @apply font-serif;
+}
+
 h2 {
   @apply text-2xl font-semibold pb-4 pt-4;
 }
 
+
 .highlight{
-  @apply pl-20 pr-20 pb-4;
+  @apply font-sans pl-10 pr-10 pb-4;
 }
 
 p{
