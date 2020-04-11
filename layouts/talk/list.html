@@ -1,40 +1,85 @@
 {{ define "main" }}
-<div class="pl-20 pr-20">
+<div class="container mx-auto px-4">
   <h1 class="font-bold tracking-tight text-center text-6xl pb-4">Presentations and Conference Talks</h1>
 
   {{ with .Content }}
   <div class="article-style" itemprop="articleBody">{{ . }}</div>
   {{ end }}
 
-  {{ range .Data.Pages }}
-  <div class="pb-10">
-    <div class="relative pb-5/6">
-      <div class="rounded" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <div class="grid grid-cols-4 gap-4">
+    <div class="col-span-2">
+      {{ range first 5 .Data.Pages }}
+      <div class="max-w-sm w-full md:max-w-full lg:max-w-full lg:flex pb-5">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none object-cover bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+              style="background-image: url('{{.Params.img|absURL}}')"
+              title="">
+        {{ with .Params.youtube }}
         <iframe
-          src="https://www.youtube.com/embed/{{.Params.youtube}}?autoplay=0"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
-          allowfullscreen title="YouTube Video"></iframe>
-      </div>
-    </div>
-
-    <div class="relative px-4 -mt-16">
-      <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="pb-2 font-semibold leading-tight text-4xl"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-        <h1 class="pb-2 text-gray-500 text-sm">Posted {{ .PublishDate.Format "2006-Jan-02" }} Last updated {{ .Lastmod.Format "2006-Jan-02" }}</h1>
-        <div class="pl-4 text-lg">
-          {{ if .Params.summary }}
-          {{ .Params.summary | plainify | emojify }}
-          {{ else if .Params.abstract }}
-          {{ .Params.abstract | plainify | emojify | truncate 250 }}
-          {{ else if .Summary }}
-          {{ .Summary | plainify | emojify }}
-          {{ end }}
+              src="https://www.youtube.com/embed/{{.}}?autoplay=0"
+              style="top: 0; left: 0; width: 100%; height: 100%; border:0;"
+              allowfullscreen title="YouTube Video"></iframe>
+        {{ end }}
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+            <div class="text-gray-900 font-bold text-xl mb-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+            <p class="text-gray-700 text-base">
+              {{ if .Params.summary }}
+              {{ .Params.summary | plainify | emojify }}
+              {{ else if .Params.abstract }}
+              {{ .Params.abstract | plainify | emojify | truncate 250 }}
+              {{ else if .Summary }}
+              {{ .Summary | plainify | emojify }}
+              {{ end }}
+            </p>
+          </div>
+          <div class="flex items-center">
+            <img class="w-10 h-10 rounded-full mr-4" src="/img/James-Pogran-avatar.jpg" alt="Avatar of Jonathan Reinink">
+            <div class="text-sm">
+              <p class="text-gray-900 leading-none">{{.Site.Params.author}}</p>
+              <p class="text-gray-600">{{ .PublishDate.Format "2006-Jan-02" }}</p>
+            </div>
+          </div>
         </div>
       </div>
+      {{ end }}
     </div>
-
+    <div class="col-span-2">
+      {{ range first 5 (after 5 .Data.Pages) }}
+      <div class="max-w-sm w-full md:max-w-full lg:max-w-full lg:flex pb-5">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none object-cover bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+              style="background-image: url('{{.Params.img|absURL}}')"
+              title="">
+              <iframe
+              src="https://www.youtube.com/embed/{{.Params.youtube}}?autoplay=0"
+              style="top: 0; left: 0; width: 100%; height: 100%; border:0;"
+              allowfullscreen title="YouTube Video"></iframe>
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+            <div class="text-gray-900 font-bold text-xl mb-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+            <p class="text-gray-700 text-base">
+              {{ if .Params.summary }}
+              {{ .Params.summary | plainify | emojify }}
+              {{ else if .Params.abstract }}
+              {{ .Params.abstract | plainify | emojify | truncate 250 }}
+              {{ else if .Summary }}
+              {{ .Summary | plainify | emojify }}
+              {{ end }}
+            </p>
+          </div>
+          <div class="flex items-center">
+            <img class="w-10 h-10 rounded-full mr-4" src="/img/James-Pogran-avatar.jpg" alt="Avatar of Jonathan Reinink">
+            <div class="text-sm">
+              <p class="text-gray-900 leading-none">{{.Site.Params.author}}</p>
+              <p class="text-gray-600">{{ .PublishDate.Format "2006-Jan-02" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
   </div>
-  {{ end }}
 
 </div>
 {{ end }}
