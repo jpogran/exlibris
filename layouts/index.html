@@ -1,5 +1,6 @@
 {{ define "main" }}
 <div class="container mx-auto px-4">
+
   <div class="pt-10">
     {{ range first 1 .Site.Taxonomies.series.featured }}
     <div class="flex sm:flex-wrap md:flex-wrap lg:flex-no-wrap xl:flex-no-wrap sm:flex-col md:flex-row lg:flex-row xl:flex-row">
@@ -7,13 +8,13 @@
         <img class="rounded-lg shadow-lg" src="{{.Params.img|absURL}}" />
       </div>
       <div class="lg:w-1/3">
-        <div class="flex items-center pt-4 pl-4">
+        <div class="flex items-center pl-4">
           <h1 class="uppercase font-semibold leading-tight text-gray-600 ">{{.PublishDate.Format "January 02, 2006"}}</h1>
         </div>
-        <div class="pt-4 pl-4">
-          <h1 class="text-3xl font-bold"><a href="" class="no-underline hover:underline hover:text-blue-600" >{{.Title}}</a></h1>
+        <div class="pt-2 pl-4">
+          <h1 class="pb-2 text-3xl font-bold"><a href="" class="no-underline hover:underline hover:text-blue-600" >{{.Title}}</a></h1>
           <h1 class="pt-2">{{.Params.subTitle}}</h1>
-          <div class="px-6 py-4">
+          <div class="py-6">
             {{ range (.GetTerms "tags") }}
             <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
             {{ end }}
@@ -23,24 +24,25 @@
     </div>
     {{ end }}
   </div>
+
   <div class="border-b pt-20"></div>
 
   <div class="pt-10">
     <div class="grid lg:grid-cols-4 gap-4">
       {{ range first 4 (where (where .Site.RegularPages "Type" "post" ) ".Params.featured" "!=" true) }}
       <div class="sm:col-span-4 lg:col-span-1 sm:pb-8 md:pb-8">
-        <div class="rounded overflow-hidden shadow-lg">
-          <img class="w-full" src="{{.Params.img|absURL}}">
+        <div class="">
+          <img class="rounded shadow-lg w-full" src="{{.Params.img|absURL}}">
           <div class="px-6 py-4">
             <h1 class="uppercase font-semibold leading-tight text-gray-600 ">{{.PublishDate.Format "January 02, 2006"}}</h1>
-            <div class="font-bold text-2xl mb-2"><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></div>
+            <div class="font-bold text-xl mb-2"><a class="no-underline" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></div>
             <p class="text-gray-700 text-base truncate">
               {{.Params.subTitle}}
             </p>
           </div>
           <div class="px-6 py-4">
             {{ range (.GetTerms "tags") }}
-            <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+            <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm text-gray-700 mr-2" href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
             {{ end }}
           </div>
         </div>
@@ -49,21 +51,23 @@
     </div>
   </div>
 
+  <div class="border-b pt-4"></div>
+
   <div class="pt-10">
     <h1 class="text-xl font-bold pb-8"><a href="/media" class="no-underline hover:text-blue-800">Recent Publications</a></h1>
     <div class="grid lg:grid-cols-4 gap-4">
       {{ range first 4 (where (where .Site.RegularPages "Type" "media" ) ".Params.featured" "!=" true) }}
       <div class="sm:col-span-4 lg:col-span-1 sm:pb-8 md:pb-8">
-        <div class="rounded overflow-hidden shadow-lg">
-          <img class="w-full" src="{{.Params.img|absURL}}">
-          <div class="px-6 py-4">
+        <div class="">
+          <img class="rounded shadow-lg w-full" src="{{.Params.img|absURL}}">
+          <div class="py-4">
             <div class="flex items-center">
               <h1 class="uppercase font-semibold leading-tight text-gray-600 ">{{.PublishDate.Format "January 02, 2006"}}</h1>
               <span class="ml-2 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2" >{{ .Params.blogName }}</span>
             </div>
-            <div class="font-bold text-2xl mb-2"><a target="_blank" href="{{.Params.url}}" class="no-underline hover:underline hover:text-blue-600" >{{.Title}}</a></div>
-            <p class="text-gray-700 text-base truncate">
-              {{.Params.shortTitle}}
+            <div class="font-bold text-2xl mb-2"><a target="_blank" href="{{.Params.url}}" class="no-underline hover:underline hover:text-blue-600" >{{.Params.shortTitle}}</a></div>
+            <p class="text-gray-700 text-base">
+              {{.Title}}
             </p>
           </div>
           <div class="px-6 py-4">
@@ -77,19 +81,21 @@
     </div>
   </div>
 
+  <div class="border-b pt-4"></div>
+
   <div class="pt-8">
     <h1 class="text-xl font-bold pb-8"><a href="/talk" class="no-underline hover:text-blue-800">Recent Talks</a></h1>
     <div class="grid lg:grid-cols-4 gap-4">
       {{ range first 4 (where (where .Site.RegularPages "Type" "talk" ) ".Params.featured" "!=" true) }}
       <div class="sm:col-span-4 lg:col-span-1 sm:pb-8 md:pb-8">
-        <div class="rounded overflow-hidden shadow-lg">
-          <div class="" style="background-image: url('{{.Params.img|absURL}}')">
+        <div class="">
+          <div class="rounded shadow-lg" style="background-image: url('{{.Params.img|absURL}}')">
             <iframe
               src="https://www.youtube.com/embed/{{.Params.youtube}}?autoplay=0"
               style="top: 0; left: 0; width: 100%; height: 100%; border:0;"
               allowfullscreen title="YouTube Video"></iframe>
           </div>
-          <div class="px-6 py-4">
+          <div class="px-4 py-4">
             <div class="flex items-center">
               <h1 class="uppercase font-semibold leading-tight text-gray-600 ">{{.PublishDate.Format "January 02, 2006"}}</h1>
               <span class="ml-2 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2" >{{ .Params.conference }}</span>
