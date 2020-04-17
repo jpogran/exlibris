@@ -1,5 +1,12 @@
 <footer class="pt-10 pb-10">
-  <h1 class="text-center font-semibold">©2020 James Pogran. Powered by Hugo using the exlibris theme</h1>
+  <h1 class="text-center font-semibold">©2020 <a href="https://github.com/jpogran">James Pogran</a>.</h1>
+  <h1 class="text-center font-semibold pt-4 ">Powered by <a href="https://gohugo.com">Hugo</a> using the <a href="https://github.com/jpogran/exlibris">exlibris</a> theme</h1>
+  <script>
+    document.getElementById('nav-toggle').onclick = function(){
+      document.getElementById("nav-content").classList.toggle("hidden");
+      document.getElementById("social-content").classList.toggle("hidden");
+    }
+  </script>
   {{ if not site.IsServer }}
   {{ if site.GoogleAnalytics }}
   {{ template "_internal/google_analytics_async.html" . }}
